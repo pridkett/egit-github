@@ -10,10 +10,10 @@
  *******************************************************************************/
 package org.eclipse.egit.github.core;
 
+import org.eclipse.egit.github.core.util.DateUtils;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import org.eclipse.egit.github.core.util.DateUtils;
 
 /**
  * GitHub user model class.
@@ -60,6 +60,8 @@ public class User implements Serializable {
 	private String avatarUrl;
 
 	private String blog;
+
+	private String bio;
 
 	private String company;
 
@@ -286,6 +288,22 @@ public class User implements Serializable {
 		this.avatarUrl = avatarUrl;
 		return this;
 	}
+
+	/**
+	 * @return biography
+	 */
+	public String getBiography() {
+        return bio;
+    }
+
+	/**
+	 * @param biography
+	 * @return this user
+	 */
+    public User setBiography(String biography) {
+        this.bio = biography;
+        return this;
+    }
 
 	/**
 	 * @return blog
