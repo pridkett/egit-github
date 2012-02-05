@@ -17,8 +17,6 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_FIRST;
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_SIZE;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +34,8 @@ import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Issue service class for listing, searching, and fetching {@link Issue}
@@ -1071,5 +1071,61 @@ public class IssueService extends GitHubService {
 		request.setUri(uri);
 		request.setType(IssueEvent.class);
 		return (IssueEvent) client.get(request).getBody();
+	}
+
+	/**
+	 * Get all of an issue's events (helper function)
+	 *
+	 * @param repo
+	 * @param issue
+	 * @return
+	 * @throws IOException
+	 */
+	public List<IssueEvent> getIssueEvents(IRepositoryIdProvider repo, Issue issue)
+		throws IOException
+	{
+		return getIssueEvents(repo, issue.getNumber());
+	}
+
+	/**
+	 * Get all of an issue's events (helper function)
+	 *
+	 * @param repo
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
+	public List<IssueEvent> getIssueEvents(IRepositoryIdProvider repo, int id)
+		throws IOException
+	{
+		return getIssueEvents(repo.generateId(), Integer.toString(id));
+	}
+
+	/**
+	 * Get all of an issue's events
+	 *
+	 * @param repository
+	 * @param id
+	 * @return list of events
+	 * @throws IOException
+	 */
+	private List<IssueEvent> getIssueEvents(String repo, String id)
+			throws IOException {
+		if (id == null)
+			throw new IllegalArgumentException("Id cannot be null"); //$NON-NLS-1$
+		if (id.length() == 0)
+			throw new IllegalArgumentException("Id cannot be empty"); //$NON-NLS-1$
+
+		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
+		uri.append('/').append(repo);
+		uri.append(SEGMENT_ISSUES);
+		uri.append('/').append(id);
+		uri.append(SEGMENT_EVENTS);
+
+		PagedRequest<IssueEvent> request = createPagedRequest();
+		request.setUri(uri);
+		request.setType(new TypeToken<List<IssueEvent>>() {
+		}.getType());
+		return getAll(request);
 	}
 }
