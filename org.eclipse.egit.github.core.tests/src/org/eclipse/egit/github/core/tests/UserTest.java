@@ -55,6 +55,7 @@ public class UserTest {
 		assertNull(user.getType());
 		assertNull(user.getUrl());
 		assertFalse(user.isHireable());
+		assertNull(user.getBiography());
 	}
 
 	/**
@@ -88,5 +89,6 @@ public class UserTest {
 		assertEquals("reg", user.setType("reg").getType());
 		assertEquals("url", user.setUrl("url").getUrl());
 		assertTrue(user.setHireable(true).isHireable());
+		assertEquals("A biography", user.setBiography("A biography").getBiography());
 	}
 }
