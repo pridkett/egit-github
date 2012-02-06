@@ -31,9 +31,6 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.PROTOCOL_HTTP
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_V2_API;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_V3_API;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,10 +43,13 @@ import java.net.URL;
 import org.eclipse.egit.github.core.RequestError;
 import org.eclipse.egit.github.core.util.EncodingUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+
 /**
  * Client class for interacting with GitHub HTTP/JSON API.
  */
-public class GitHubClient {
+public class GitHubClient implements IGitHubClient {
 
 	/**
 	 * Create API v3 client from URL.
@@ -144,6 +144,14 @@ public class GitHubClient {
 	private String userAgent;
 
 	private int bufferSize = 8192;
+
+	/**
+	 * Rate limiting stuff
+	 */
+    private static final String HEADER_RATELIMIT = "X-RateLimit-Limit";
+    private static final String HEADER_RATELIMITREMAINING = "X-RateLimit-Remaining";
+    private Integer rateLimit = null;
+    private Integer rateLimitRemaining = null;
 
 	/**
 	 * Create default client
@@ -622,8 +630,10 @@ public class GitHubClient {
 	public GitHubResponse get(GitHubRequest request) throws IOException {
 		HttpURLConnection httpRequest = createGet(request.generateUri());
 		String accept = request.getResponseContentType();
+		updateThrottling(httpRequest);
 		if (accept != null)
 			httpRequest.setRequestProperty(HEADER_ACCEPT, accept);
+
 		final int code = httpRequest.getResponseCode();
 		if (isOk(code))
 			return new GitHubResponse(httpRequest, getBody(request,
@@ -647,6 +657,7 @@ public class GitHubClient {
 	public <V> V post(final String uri, final Object params, final Type type)
 			throws IOException {
 		HttpURLConnection request = createPost(uri);
+		updateThrottling(request);
 		return sendJson(request, params, type);
 	}
 
@@ -663,6 +674,7 @@ public class GitHubClient {
 	public <V> V put(final String uri, final Object params, final Type type)
 			throws IOException {
 		HttpURLConnection request = createPut(uri);
+		updateThrottling(request);
 		return sendJson(request, params, type);
 	}
 
@@ -680,7 +692,28 @@ public class GitHubClient {
 		if (params != null)
 			sendParams(request, params);
 		final int code = request.getResponseCode();
+		updateThrottling(request);
 		if (!isEmpty(code))
 			throw new RequestException(parseError(getStream(request)), code);
 	}
+
+	/**
+	 * Called after each request to update the information about rate limits
+	 *
+	 * @param httpRequest
+	 */
+	private void updateThrottling(HttpURLConnection httpRequest) {
+		String limit = httpRequest.getHeaderField(HEADER_RATELIMIT);
+		String remaining = httpRequest.getHeaderField(HEADER_RATELIMITREMAINING);
+		if (limit != null) {
+			rateLimit = Integer.parseInt(limit);
+		}
+		if (remaining != null) {
+			rateLimitRemaining = Integer.parseInt(remaining);
+		}
+	}
+
+	public int getRateLimit() { return rateLimit; }
+
+	public int getRateLimitRemaining() { return rateLimitRemaining; }
 }

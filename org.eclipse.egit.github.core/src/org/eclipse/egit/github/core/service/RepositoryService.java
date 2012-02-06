@@ -29,8 +29,6 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_V2_AP
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_FIRST;
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_SIZE;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Collections;
@@ -50,8 +48,11 @@ import org.eclipse.egit.github.core.RepositoryTag;
 import org.eclipse.egit.github.core.SearchRepository;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Repository service class.
@@ -134,7 +135,7 @@ public class RepositoryService extends GitHubService {
 	 * @param client
 	 *            cannot be null
 	 */
-	public RepositoryService(GitHubClient client) {
+	public RepositoryService(IGitHubClient client) {
 		super(client);
 	}
 

@@ -32,6 +32,7 @@ import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
 
@@ -164,7 +165,7 @@ public class IssueService extends GitHubService {
 	 * @param client
 	 *            cannot be null
 	 */
-	public IssueService(GitHubClient client) {
+	public IssueService(IGitHubClient client) {
 		super(client);
 	}
 

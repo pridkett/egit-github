@@ -21,6 +21,7 @@ import java.util.List;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.NoSuchPageException;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
@@ -30,7 +31,6 @@ import org.eclipse.egit.github.core.client.RequestException;
  * Base GitHub service class.
  */
 public abstract class GitHubService {
-
 	/**
 	 * Accept header for full response
 	 */
@@ -49,7 +49,7 @@ public abstract class GitHubService {
 	/**
 	 * Client field
 	 */
-	protected final GitHubClient client;
+	protected final IGitHubClient client;
 
 	/**
 	 * Create service using a default {@link GitHubClient}
@@ -64,7 +64,7 @@ public abstract class GitHubService {
 	 * @param client
 	 *            must be non-null
 	 */
-	public GitHubService(GitHubClient client) {
+	public GitHubService(IGitHubClient client) {
 		if (client == null)
 			throw new IllegalArgumentException("Client cannot be null"); //$NON-NLS-1$
 		this.client = client;
@@ -75,7 +75,7 @@ public abstract class GitHubService {
 	 *
 	 * @return non-null client
 	 */
-	public GitHubClient getClient() {
+	public IGitHubClient getClient() {
 		return client;
 	}
 
@@ -209,4 +209,5 @@ public abstract class GitHubService {
 			throw new IllegalArgumentException("Repository cannot be empty"); //$NON-NLS-1$
 		return this;
 	}
+
 }

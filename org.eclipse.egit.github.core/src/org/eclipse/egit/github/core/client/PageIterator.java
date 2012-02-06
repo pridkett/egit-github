@@ -50,7 +50,7 @@ public class PageIterator<V> implements Iterator<Collection<V>>,
 	/**
 	 * Client
 	 */
-	protected final GitHubClient client;
+	protected final IGitHubClient client;
 
 	/**
 	 * Current page number
@@ -78,7 +78,7 @@ public class PageIterator<V> implements Iterator<Collection<V>>,
 	 * @param request
 	 * @param client
 	 */
-	public PageIterator(PagedRequest<V> request, GitHubClient client) {
+	public PageIterator(PagedRequest<V> request, IGitHubClient client) {
 		this.request = request;
 		this.client = client;
 		next = request.getUri();
