@@ -15,8 +15,6 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_ORGS;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_TEAMS;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -26,9 +24,11 @@ import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.Team;
 import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Service class for working with organization teams
@@ -50,7 +50,7 @@ public class TeamService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public TeamService(GitHubClient client) {
+	public TeamService(IGitHubClient client) {
 		super(client);
 	}
 

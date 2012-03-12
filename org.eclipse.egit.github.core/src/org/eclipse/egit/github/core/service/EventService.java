@@ -21,7 +21,7 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_USERS
 import java.util.List;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.client.GitHubClient;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
 import org.eclipse.egit.github.core.event.Event;
@@ -50,7 +50,7 @@ public class EventService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public EventService(GitHubClient client) {
+	public EventService(IGitHubClient client) {
 		super(client);
 	}
 

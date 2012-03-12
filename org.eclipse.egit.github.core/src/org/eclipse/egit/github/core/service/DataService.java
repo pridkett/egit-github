@@ -18,8 +18,6 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_TAGS;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_TREES;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,9 +35,11 @@ import org.eclipse.egit.github.core.Tag;
 import org.eclipse.egit.github.core.Tree;
 import org.eclipse.egit.github.core.TreeEntry;
 import org.eclipse.egit.github.core.TypedResource;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Data service class for low-level access to Git repository data.
@@ -61,7 +61,7 @@ public class DataService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public DataService(GitHubClient client) {
+	public DataService(IGitHubClient client) {
 		super(client);
 	}
 

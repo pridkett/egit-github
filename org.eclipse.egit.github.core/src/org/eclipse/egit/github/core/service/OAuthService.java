@@ -12,8 +12,6 @@ package org.eclipse.egit.github.core.service;
 
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_AUTHORIZATIONS;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,9 +19,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.egit.github.core.Authorization;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Service for interacting with a user's OAUth authorizations
@@ -45,7 +45,7 @@ public class OAuthService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public OAuthService(GitHubClient client) {
+	public OAuthService(IGitHubClient client) {
 		super(client);
 	}
 

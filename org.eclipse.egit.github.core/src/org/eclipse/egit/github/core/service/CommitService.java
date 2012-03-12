@@ -17,8 +17,6 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_FIRST;
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_SIZE;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -28,10 +26,12 @@ import org.eclipse.egit.github.core.CommitComment;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.RepositoryCommit;
 import org.eclipse.egit.github.core.RepositoryCommitCompare;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Service for interacting with repository commits
@@ -53,7 +53,7 @@ public class CommitService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public CommitService(GitHubClient client) {
+	public CommitService(IGitHubClient client) {
 		super(client);
 	}
 

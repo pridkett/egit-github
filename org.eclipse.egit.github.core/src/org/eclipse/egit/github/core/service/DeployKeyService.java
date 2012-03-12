@@ -13,16 +13,16 @@ package org.eclipse.egit.github.core.service;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_KEYS;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Key;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Service for interacting with a repository's deploy keys
@@ -44,7 +44,7 @@ public class DeployKeyService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public DeployKeyService(GitHubClient client) {
+	public DeployKeyService(IGitHubClient client) {
 		super(client);
 	}
 

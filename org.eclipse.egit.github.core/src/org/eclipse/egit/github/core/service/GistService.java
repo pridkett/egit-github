@@ -18,8 +18,6 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_STAR;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_STARRED;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_USERS;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -27,10 +25,12 @@ import java.util.Map;
 
 import org.eclipse.egit.github.core.Comment;
 import org.eclipse.egit.github.core.Gist;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Service class for interacting with Gists and Gist comments.
@@ -54,7 +54,7 @@ public class GistService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public GistService(GitHubClient client) {
+	public GistService(IGitHubClient client) {
 		super(client);
 	}
 

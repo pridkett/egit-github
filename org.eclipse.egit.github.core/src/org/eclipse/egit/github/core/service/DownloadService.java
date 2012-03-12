@@ -16,8 +16,6 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_FIRST;
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_SIZE;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,11 +28,13 @@ import java.util.Map;
 import org.eclipse.egit.github.core.Download;
 import org.eclipse.egit.github.core.DownloadResource;
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
 import org.eclipse.egit.github.core.util.MultiPartUtils;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Service for accessing, creating, and deleting repositories downloads.
@@ -101,7 +101,7 @@ public class DownloadService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public DownloadService(GitHubClient client) {
+	public DownloadService(IGitHubClient client) {
 		super(client);
 	}
 

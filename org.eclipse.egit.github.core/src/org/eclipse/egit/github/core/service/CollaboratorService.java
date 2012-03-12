@@ -13,15 +13,15 @@ package org.eclipse.egit.github.core.service;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_COLLABORATORS;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.client.GitHubClient;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Service for interacting with the collaborators on a GitHub repository
@@ -43,7 +43,7 @@ public class CollaboratorService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public CollaboratorService(GitHubClient client) {
+	public CollaboratorService(IGitHubClient client) {
 		super(client);
 	}
 

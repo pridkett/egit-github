@@ -13,8 +13,6 @@ package org.eclipse.egit.github.core.service;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_MILESTONES;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +21,10 @@ import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Milestone;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Milestone service class for listing the {@link Milestone} objects in use by a
@@ -47,7 +48,7 @@ public class MilestoneService extends GitHubService {
 	 * @param client
 	 *            cannot be null
 	 */
-	public MilestoneService(GitHubClient client) {
+	public MilestoneService(IGitHubClient client) {
 		super(client);
 	}
 

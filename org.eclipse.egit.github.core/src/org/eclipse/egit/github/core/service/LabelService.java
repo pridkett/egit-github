@@ -14,16 +14,16 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_ISSUE
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_LABELS;
 import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Label;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.GitHubRequest;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Label service class for listing {@link Label} objects in use for a given
@@ -46,7 +46,7 @@ public class LabelService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public LabelService(GitHubClient client) {
+	public LabelService(IGitHubClient client) {
 		super(client);
 	}
 

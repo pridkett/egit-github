@@ -18,17 +18,17 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_WATCH
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_FIRST;
 import static org.eclipse.egit.github.core.client.PagedRequest.PAGE_SIZE;
 
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.client.GitHubClient;
+import org.eclipse.egit.github.core.client.IGitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.client.PagedRequest;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Service class for dealing with users watching GitHub repositories.
@@ -50,7 +50,7 @@ public class WatcherService extends GitHubService {
 	 *
 	 * @param client
 	 */
-	public WatcherService(GitHubClient client) {
+	public WatcherService(IGitHubClient client) {
 		super(client);
 	}
 
